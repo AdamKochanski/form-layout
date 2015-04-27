@@ -1,0 +1,100 @@
+﻿<!doctype html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8">
+	<title>Strona rejestracji kandydatów do działu IT</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body ng-app="myApp" ng-controller="formCtrl">
+
+	<div class="container centering" >
+
+		<form ng-submit="processForm()">
+			<div class="col-xs-offset-1 col-xs-10">
+				<label>Imię</label><input type="text" class="form-control" autofocus required ng-model="user.firstName"><br>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-10">
+				<label>Nazwisko</label><input type="text" class="form-control" required ng-model="user.lastName" ><br>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-10">
+				<label>Email</label><input type="email" class="form-control" required ng-model="user.email"><br>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-10">
+				<label>Numer kontaktowy</label><input type="phone" class="form-control" required ng-model="user.phone"><br>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-4">
+				<label>Stanowisko</label>
+				<select class="form-control" required ng-model="user.position">
+					<option>Front-End</option>
+					<option>Back-End</option>
+					<option>Designer</option>
+				</select><br>
+			</div>
+
+			<div class="col-xs-6" required>
+				<label>Data urodzenia</label><input type="text"  class="form-control" required ng-model="user.dateOfBirth"><br>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-10">
+				<label><input type="checkbox" ng-model="user.selfEmployed">  Posiadam własną działalność gospodarczą</label>
+			<br><br>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-10">
+				<label>Doświadczenie</label>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-4">
+				<input type="text" class="form-control" placeholder="Nazwa firmy" autofocus ng-model="user.companyName"><br>
+			</div>   
+
+			<div class="col-xs-4">
+				<input type="text" class="form-control" placeholder="Czas pracy (lata)" autofocus ng-model="user.duration"><br>
+			</div>  
+
+			<div class="col-xs-1">
+				<button type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button><br>
+			</div>
+
+
+			<div class="col-xs-offset-1 col-xs-4 center">
+				<br><input type="submit" class="btn btn-default" value="WYŚLIJ ZGŁOSZENIE"><br>
+			</div>
+		</form>
+	</div>
+
+    <script src="sources/jquery-2.1.3.min.js"></script>
+    <script src="sources/angular.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="sources/postfix.js"></script>
+    
+    <script>
+
+	app.controller('formCtrl', function($scope, $http) {
+      
+      $scope.processForm = function(){
+      	loading = true;
+      	user = {};
+      	
+      	$http.post('angular-test.php', $scope.user).success(function(response) {
+        	$scope.response = response;
+        	$scope.loading = false;
+        
+     	 });
+
+      	alert("Dziękujemy za wypełnienie formularza")
+
+  		};
+      });
+
+	</script>
+</body>
+</html>
