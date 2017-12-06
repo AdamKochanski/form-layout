@@ -1,7 +1,3 @@
-# form-layout
-form div layout
+# registration-form-mockup
 
-one
-two 
-
-<h1>Title</h1>
+registration form mockup with angular post-fix
